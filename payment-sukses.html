@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Payment sukses</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:#fff;color:#2d2a4a;font-family:Fredoka,system-ui,sans-serif;overflow:hidden;display:grid;place-items:center;text-align:center;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.st{position:relative;z-index:2;padding:0 16px}
+.badge{position:relative;width:120px;height:120px;margin:0 auto 18px}
+.badge svg{position:relative;z-index:2;width:100%;height:100%;animation:boing .9s cubic-bezier(.3,1.7,.5,1) both,beat 1.6s 1s ease-in-out infinite}
+.badge circle{fill:#bfeee0;stroke:#2d2a4a;stroke-width:4}
+.badge path{fill:none;stroke:#2d2a4a;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:80;stroke-dashoffset:80;animation:dr .6s .5s ease-out forwards}
+.badge i{position:absolute;inset:0;border-radius:50%;border:4px solid #ffb7d5;animation:ring 2s ease-out infinite;opacity:0}
+.badge i:nth-child(2){animation-delay:.66s;border-color:#ffb347}.badge i:nth-child(3){animation-delay:1.32s;border-color:#8fb0ff}
+h1{margin:0;font-weight:700;font-size:clamp(44px,13vw,110px);line-height:1.05;letter-spacing:-.01em}
+h1 span{display:inline-block;animation:drop .8s cubic-bezier(.3,1.6,.5,1) both,wave 2.2s ease-in-out infinite;animation-delay:calc(var(--i)*.06s),calc(1s + var(--i)*.09s);color:hsl(calc(var(--i)*28),85%,55%);text-shadow:0 4px 0 rgba(45,42,74,.15)}
+h1 .sp{width:.3em}
+.sub{margin:14px 0 0;font-weight:700;font-size:clamp(26px,7vw,48px);color:#2d2a4a;animation:pop 1s .9s both,wob 2.4s 2s ease-in-out infinite}
+.sub b{background:linear-gradient(90deg,#ff6fa8,#ffb347,#5b8def,#b79cf0,#ff6fa8);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:slide 3s linear infinite}
+.hint{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:0;right:0;font-size:14px;color:#8a86a6;z-index:2}
+.cf{position:fixed;top:-20px;width:12px;height:16px;z-index:1;pointer-events:none;animation:fall var(--d) linear var(--dl) infinite}
+.sp2{position:fixed;z-index:1;font-size:28px;pointer-events:none;animation:tw 2.4s ease-in-out infinite}
+.burst{position:fixed;left:50%;top:38%;z-index:3;pointer-events:none}
+.burst i{position:absolute;width:12px;height:12px;border-radius:3px;animation:bu 1.4s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes drop{from{transform:translateY(-140px) rotate(-30deg) scale(.3);opacity:0}}
+@keyframes wave{50%{transform:translateY(-12px) rotate(3deg)}}
+@keyframes boing{from{transform:scale(0) rotate(-60deg)}}
+@keyframes beat{50%{transform:scale(1.08)}}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+@keyframes pop{from{transform:scale(0);opacity:0}}
+@keyframes wob{50%{transform:rotate(-2deg) scale(1.05)}}
+@keyframes slide{to{background-position:200% 0}}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes tw{50%{transform:scale(1.5) rotate(25deg);opacity:.4}}
+@keyframes bu{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.badge path{stroke-dashoffset:0}.cf,.sp2,.badge i{display:none}}
+</style></head>
+<body>
+<main class="st">
+<div class="badge"><i></i><i></i><i></i><svg viewBox="0 0 100 100" role="img" aria-label="Berhasil"><circle cx="50" cy="50" r="44"/><path d="M28 52l16 16 30-34"/></svg></div>
+<h1 id="t" aria-label="Payment sukses">Payment sukses</h1>
+<p class="sub"><b>Terima kasih!</b> 🎉</p>
+</main>
+<div class="hint">Ketuk layar untuk konfeti lagi</div>
+<script>
+const C=["#ff6fa8","#ffb347","#5b8def","#b79cf0","#3ecf9a","#ffd23f"],R=Math.random;
+const t=document.getElementById("t"),w=t.textContent;t.textContent="";
+[...w].forEach((c,i)=>{const s=document.createElement("span");s.style.setProperty("--i",i);s.setAttribute("aria-hidden","true");if(c==" "){s.className="sp";s.innerHTML="&nbsp;"}else s.textContent=c;t.append(s)});
+for(let i=0;i<70;i++){const e=document.createElement("i");e.className="cf";e.style.cssText=`left:${R()*100}vw;background:${C[i%6]};--d:${3+R()*3}s;--dl:${-R()*6}s;border-radius:${i%3?"2px":"50%"}`;document.body.append(e)}
+["✦","★","✧","✦","★","✧"].forEach((s,i)=>{const e=document.createElement("span");e.className="sp2";e.textContent=s;e.style.cssText=`left:${8+R()*84}vw;top:${6+R()*80}vh;color:${C[i%6]};animation-delay:${-R()*2}s`;document.body.append(e)});
+function burst(){const b=document.createElement("div");b.className="burst";for(let i=0;i<46;i++){const a=R()*6.283,d=120+R()*300,e=document.createElement("i");e.style.cssText=`background:${C[i%6]};--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px;--r:${R()*720-360}deg`;b.append(e)}document.body.append(b);setTimeout(()=>b.remove(),1500)}
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches){setTimeout(burst,500);setTimeout(burst,1400);setInterval(burst,4000)}
+document.addEventListener("click",burst);
+</script>
+</body></html>
