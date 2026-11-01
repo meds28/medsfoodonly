@@ -88,7 +88,7 @@ function anim(){document.querySelectorAll(".cnt").forEach(e=>{const v=+e.dataset
  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w+"%")))}
 const ck=(n,t)=>{let h=7;for(const c of n+"|"+t+"|msf")h=(h*31+c.charCodeAt(0))>>>0;return String(h%900000+100000)};let bp=null;
 function settle(){if(!pay||pay.st!="w")return;clearInterval(timer);pay.items.forEach(([i,q])=>pr(i).s-=q);pay.st="b";cart={};$("#cc").textContent=0;toast("Yeay! Pembayaran berhasil 🎉");go("cart");party()}
-function route(){const m=location.hash.match(/^#bayar-(MF-[A-Z0-9]+)-(\d+)$/);if(m&&+m[2]>0){bp={no:m[1],t:+m[2]};go("bayar");return true}return false}
+function route(){if(location.hash==="#produk"){go("produk");return true;}const m=location.hash.match(/^#bayar-(MF-[A-Z0-9]+)-(\d+)$/);if(m&&+m[2]>0){bp={no:m[1],t:+m[2]};go("bayar");return true}return false}
 addEventListener("hashchange",route);
 addEventListener("storage",e=>{if(e.key=="mf.paid"&&e.newValue&&pay&&pay.st=="w"&&e.newValue.split("|")[0]==pay.no)settle()});
 function login(){if($("#ap").value==="websincostan"){adm=true;go("admin")}else{toast("Password salah");$("#ap").value="";const l=$("#lg");l.classList.remove("sh");void l.offsetWidth;l.classList.add("sh")}}
